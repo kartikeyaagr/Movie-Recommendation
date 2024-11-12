@@ -1,2 +1,2 @@
-# CKD-and-Diabetes-Predictor
+# Movie Recommendation
 Early Prediction of Diabetes and Chronic Kidney Disease Using Machine Learning
