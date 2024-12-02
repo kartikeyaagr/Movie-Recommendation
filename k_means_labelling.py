@@ -50,8 +50,9 @@ def clean_data(df):
     df["Production"] = df["Production"].apply(lambda x: x.split(", "))
     df["Languages"] = df["Languages"].apply(lambda x: x.split(", "))
     df["Keywords"] = df["Keywords"].apply(lambda x: x.split(", "))
-    
+
     return df
+
 
 movies_clean = clean_data(movies.copy())
 movies = movies_clean.copy()  # Create a fresh copy to avoid SettingWithCopyWarning
@@ -96,7 +97,8 @@ combined_matrix_scaled = scaler.fit_transform(combined_matrix)
 
 from sklearn.exceptions import DataConversionWarning
 import warnings
-warnings.filterwarnings(action='ignore', category=DataConversionWarning)
+
+warnings.filterwarnings(action="ignore", category=DataConversionWarning)
 
 # Fix invalid entries in combined_matrix
 combined_matrix.fillna(0, inplace=True)
@@ -119,13 +121,13 @@ num_clusters = 5  # You can change the number of clusters
 kmeans = KMeans(n_clusters=num_clusters, random_state=0)
 
 # Slice the scaled matrix to match the movies DataFrame length
-combined_matrix_scaled_sliced = combined_matrix_scaled[:len(movies)]
+combined_matrix_scaled_sliced = combined_matrix_scaled[: len(movies)]
 
 # Fit and predict clusters
 cluster_labels = kmeans.fit_predict(combined_matrix_scaled_sliced)
 
 # Use .loc to assign clusters to avoid SettingWithCopyWarning
-movies.loc[:, 'Cluster'] = cluster_labels
+movies.loc[:, "Cluster"] = cluster_labels
 
 # Save the vectorizations before PCA
 combined_matrix_df = pd.DataFrame(combined_matrix_scaled_sliced)
@@ -137,8 +139,11 @@ combined_matrix_pca = pca.fit_transform(combined_matrix_scaled_sliced)
 # Save the vectorizations after PCA
 combined_matrix_pca_df = pd.DataFrame(combined_matrix_pca)
 # Plot the clusters
-movies.loc[:, 'PCA1'] = combined_matrix_pca[:, 0]
-movies.loc[:, 'PCA2'] = combined_matrix_pca[:, 1]
+movies.loc[:, "PCA1"] = combined_matrix_pca[:, 0]
+movies.loc[:, "PCA2"] = combined_matrix_pca[:, 1]
 
 
-movies.to_csv("/home/kartikeya.agrawal_ug25/Movie-Recommendation/new_movies.csv", index=False)
+movies.to_csv(
+    "/home/kartikeya.agrawal_ug25/Movie-Recommendation/movies_clustered.csv",
+    index=False,
+)
