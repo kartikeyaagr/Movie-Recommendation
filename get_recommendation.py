@@ -35,6 +35,6 @@ for rec_idx in first_movie_recommendations:
 # Save the recommendations to a CSV file
 recommendations_df = pd.DataFrame.from_dict(top_100_recommendations, orient="index")
 recommendations_df.to_csv(
-    "/home/kartikeya.agrawal_ug25/Movie-Recommendation/top_100_recommendations.csv",
+    "/home/kartikeya.agrawal_ug25/Movie-Recommendation/recommendations.csv",
     index=False,
 )

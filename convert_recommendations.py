@@ -3,7 +3,7 @@ import json
 
 # Load the uploaded files
 movies_file_path = "movies.csv"
-recommendations_file_path = "top_100_recommendations.csv"
+recommendations_file_path = "recommendations.csv"
 
 # Read the CSV files into DataFrames
 movies_df = pd.read_csv(movies_file_path)
@@ -34,7 +34,7 @@ for idx, row in recommendations_df.iterrows():
     }
 
 # Saving the output to a JSON file
-output_file_path = "top_100_recommendations_details.json"
+output_file_path = "recommendations_details.json"
 with open(output_file_path, "w") as json_file:
     json.dump(top_recommendations_details, json_file, indent=4)
 
